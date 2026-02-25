@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — StatusStudio</title>
+  <meta name="description" content="StatusStudio Terms of Service — Rules and guidelines for using our app." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --violet: #6B21FF;
+      --mint: #3DFFA0;
+      --mint-dim: #1ACC6E;
+      --red: #FF4466;
+      --bg: #07050F;
+      --bg-card: #0F0C1E;
+      --bg-elevated: #16122B;
+      --text: #F4F0FF;
+      --text-sub: #A89BC4;
+      --text-hint: #5A5170;
+      --border: rgba(255,255,255,0.07);
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    nav {
+      position: sticky;
+      top: 0; z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      background: rgba(7,5,15,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #4B0FCC, #6B21FF, #3DFFA0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      color: var(--text);
+    }
+
+    .logo-text span { color: var(--mint); }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--text); }
+
+    .doc-hero {
+      background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 48px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .doc-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(61,255,160,0.1), transparent 70%);
+      pointer-events: none;
+    }
+
+    .doc-hero-inner { max-width: 800px; margin: 0 auto; }
+
+    .doc-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(61,255,160,0.1);
+      border: 1px solid rgba(61,255,160,0.2);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mint-dim);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .doc-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .doc-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 16px;
+    }
+
+    .doc-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 48px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 90px;
+    }
+
+    .toc-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-hint);
+      margin-bottom: 16px;
+    }
+
+    .toc ol { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+
+    .toc ol li a {
+      display: block;
+      font-size: 13px;
+      color: var(--text-sub);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border-left: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      line-height: 1.4;
+    }
+
+    .toc ol li a:hover {
+      color: var(--text);
+      border-left-color: var(--mint-dim);
+      background: rgba(61,255,160,0.06);
+    }
+
+    .doc-content { max-width: 720px; }
+
+    .doc-section {
+      margin-bottom: 52px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .section-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mint-dim);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .doc-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -0.3px;
+    }
+
+    .doc-section p {
+      font-size: 15px;
+      color: var(--text-sub);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    .doc-section p:last-child { margin-bottom: 0; }
+
+    .doc-section h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 28px 0 12px;
+    }
+
+    .doc-section ul, .doc-section ol {
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .doc-section ul li, .doc-section ol li {
+      font-size: 15px;
+      color: var(--text-sub);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.7;
+    }
+
+    .doc-section ul li::before {
+      content: '▸';
+      color: var(--mint-dim);
+      font-size: 12px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .doc-section ol { counter-reset: list; }
+    .doc-section ol li { counter-increment: list; }
+    .doc-section ol li::before {
+      content: counter(list) '.';
+      color: var(--mint-dim);
+      font-weight: 700;
+      font-size: 13px;
+      min-width: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .highlight-box {
+      background: rgba(61,255,160,0.06);
+      border: 1px solid rgba(61,255,160,0.15);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .highlight-box p { color: var(--text-sub); font-size: 14px; margin-bottom: 0; }
+    .highlight-box strong { color: var(--text); }
+
+    .warning-box {
+      background: rgba(255,68,102,0.07);
+      border: 1px solid rgba(255,68,102,0.2);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .warning-box p { color: var(--text-sub); font-size: 14px; margin-bottom: 0; }
+    .warning-box strong { color: #FF8099; }
+
+    .contact-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 20px;
+    }
+
+    .contact-box p { font-size: 14px; margin-bottom: 8px; }
+    .contact-box a { color: var(--mint); text-decoration: none; font-weight: 600; }
+
+    .doc-footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-hint);
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .doc-footer a { color: var(--text-sub); text-decoration: none; }
+    .doc-footer a:hover { color: var(--text); }
+
+    @media (max-width: 800px) {
+      nav, .doc-hero { padding: 0 20px; }
+      .doc-hero { padding: 40px 20px 36px; }
+      .doc-layout { grid-template-columns: 1fr; padding: 40px 20px; gap: 40px; }
+      .toc { display: none; }
+      .doc-footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">S</div>
+    <span class="logo-text">Status<span>Studio</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<div class="doc-hero">
+  <div class="doc-hero-inner">
+    <div class="doc-type-badge">📄 Legal Document</div>
+    <h1>Terms of Service</h1>
+    <p style="color:var(--text-sub); font-size:16px; max-width:580px; line-height:1.7; margin-top:12px;">
+      These terms govern your use of StatusStudio. By using the app, you agree to these terms. Please read them carefully before using our services.
+    </p>
+    <div class="doc-meta">
+      <span>📅 Effective Date: January 1, 2025</span>
+      <span>🔄 Last Updated: June 1, 2025</span>
+      <span>🏢 Creed Digital</span>
+    </div>
+  </div>
+</div>
+
+<div class="doc-layout">
+
+  <aside class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#t1">Agreement to Terms</a></li>
+      <li><a href="#t2">Description of Service</a></li>
+      <li><a href="#t3">Eligibility</a></li>
+      <li><a href="#t4">Account Registration</a></li>
+      <li><a href="#t5">Acceptable Use</a></li>
+      <li><a href="#t6">Prohibited Content</a></li>
+      <li><a href="#t7">Intellectual Property</a></li>
+      <li><a href="#t8">Your Content</a></li>
+      <li><a href="#t9">Premium Subscriptions</a></li>
+      <li><a href="#t10">Free Tier & Ads</a></li>
+      <li><a href="#t11">Disclaimers</a></li>
+      <li><a href="#t12">Limitation of Liability</a></li>
+      <li><a href="#t13">Indemnification</a></li>
+      <li><a href="#t14">Termination</a></li>
+      <li><a href="#t15">Governing Law</a></li>
+      <li><a href="#t16">Changes to Terms</a></li>
+      <li><a href="#t17">Contact</a></li>
+    </ol>
+  </aside>
+
+  <div class="doc-content">
+
+    <div class="doc-section" id="t1">
+      <div class="section-number">Section 01</div>
+      <h2>Agreement to Terms</h2>
+      <div class="highlight-box">
+        <p><strong>By downloading, installing, or using StatusStudio, you agree to be bound by these Terms of Service.</strong> If you do not agree to all of these terms, you may not access or use the App.</p>
+      </div>
+      <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User," "you," or "your") and Creed Digital ("Company," "we," "us," or "our") regarding your use of the StatusStudio mobile application ("App") and any related services.</p>
+      <p>These Terms incorporate by reference our Privacy Policy, which is available at <a href="privacy.html" style="color:var(--mint);">statusstudio.creed.com/privacy</a>.</p>
+    </div>
+
+    <div class="doc-section" id="t2">
+      <div class="section-number">Section 02</div>
+      <h2>Description of Service</h2>
+      <p>StatusStudio is a mobile creative application that provides tools for creating, editing, and sharing digital content including:</p>
+      <ul>
+        <li>Text board creation and design</li>
+        <li>Photo collage editing and composition</li>
+        <li>Video editing (trim, crop, speed adjustment, mute)</li>
+        <li>Video splitting into platform-sized segments</li>
+        <li>Audio extraction from video</li>
+        <li>Audiogram generation</li>
+        <li>Auto-caption generation and editing</li>
+        <li>Multi-clip video merging</li>
+        <li>Platform-specific templates for social media</li>
+        <li>Brand kit management</li>
+        <li>HD and 4K content export</li>
+      </ul>
+      <p>We reserve the right to modify, suspend, or discontinue any part of the service at any time with reasonable notice.</p>
+    </div>
+
+    <div class="doc-section" id="t3">
+      <div class="section-number">Section 03</div>
+      <h2>Eligibility</h2>
+      <p>To use StatusStudio, you must:</p>
+      <ul>
+        <li>Be at least 13 years of age (or 16 in the European Economic Area)</li>
+        <li>Have the legal capacity to enter into a binding contract</li>
+        <li>Not be prohibited from using the App under applicable laws</li>
+        <li>Not have had a previous account terminated for violations of these Terms</li>
+      </ul>
+      <p>If you are between 13 and 18 years old, you confirm that you have obtained parental or guardian consent to use the App and agree to these Terms.</p>
+      <p>By using the App, you represent and warrant that you meet all eligibility requirements. We reserve the right to verify your eligibility and to refuse or terminate access at our discretion.</p>
+    </div>
+
+    <div class="doc-section" id="t4">
+      <div class="section-number">Section 04</div>
+      <h2>Account Registration</h2>
+      <h3>4.1 Account Creation</h3>
+      <p>You may use StatusStudio as a guest without creating an account. To access certain features (cloud sync, project backup, Premium subscription), you must sign in using:</p>
+      <ul>
+        <li>Sign in with Google</li>
+        <li>Sign in with Apple</li>
+      </ul>
+
+      <h3>4.2 Account Responsibilities</h3>
+      <p>You are responsible for:</p>
+      <ul>
+        <li>Maintaining the confidentiality of your account credentials</li>
+        <li>All activity that occurs under your account</li>
+        <li>Notifying us immediately of any unauthorized use of your account</li>
+        <li>Ensuring your account information is accurate and up to date</li>
+      </ul>
+
+      <h3>4.3 One Account Per User</h3>
+      <p>Each user may maintain only one active account. Creating multiple accounts to circumvent restrictions, bans, or free tier limits is prohibited.</p>
+
+      <h3>4.4 Account Security</h3>
+      <p>We are not liable for any loss resulting from unauthorized access to your account where you failed to keep your credentials secure. Do not share your login credentials with others.</p>
+    </div>
+
+    <div class="doc-section" id="t5">
+      <div class="section-number">Section 05</div>
+      <h2>Acceptable Use</h2>
+      <p>You agree to use StatusStudio only for lawful purposes and in accordance with these Terms. You agree that you will:</p>
+      <ul>
+        <li>Comply with all applicable local, national, and international laws and regulations</li>
+        <li>Use the App only for personal, non-commercial content creation unless expressly permitted</li>
+        <li>Respect the intellectual property rights of third parties</li>
+        <li>Not attempt to reverse-engineer, decompile, or disassemble the App</li>
+        <li>Not use automated scripts, bots, or tools to access the App in unauthorized ways</li>
+        <li>Not attempt to gain unauthorized access to any part of the App or its related systems</li>
+        <li>Not interfere with or disrupt the integrity or performance of the App</li>
+        <li>Not transmit viruses, malware, or any other malicious code</li>
+        <li>Not use the App to spam, harass, threaten, or harm any person</li>
+        <li>Not misrepresent your identity or affiliation with any person or entity</li>
+      </ul>
+    </div>
+
+    <div class="doc-section" id="t6">
+      <div class="section-number">Section 06</div>
+      <h2>Prohibited Content</h2>
+      <div class="warning-box">
+        <p><strong>Creating, sharing, or distributing any of the following content using StatusStudio is strictly prohibited and may result in immediate account termination and reporting to relevant authorities.</strong></p>
+      </div>
+      <p>You may not use StatusStudio to create or distribute content that:</p>
+      <ul>
+        <li>Depicts, promotes, or sexualizes minors in any way (CSAM)</li>
+        <li>Constitutes hate speech targeting individuals based on race, ethnicity, religion, gender, sexual orientation, disability, or national origin</li>
+        <li>Promotes violence, terrorism, or incites harm against individuals or groups</li>
+        <li>Is defamatory, libelous, or knowingly false</li>
+        <li>Infringes on the copyright, trademark, patent, or other intellectual property rights of others</li>
+        <li>Violates the privacy of others, including non-consensual intimate imagery ("revenge porn")</li>
+        <li>Contains personally identifiable information of others without their consent</li>
+        <li>Promotes illegal activities or services</li>
+        <li>Constitutes fraud, impersonation, or deceptive practices</li>
+        <li>Violates any applicable laws or regulations in your jurisdiction</li>
+      </ul>
+      <p>We reserve the right, but not the obligation, to monitor, review, and remove content that violates these Terms. Violations may be reported to law enforcement where required by law.</p>
+    </div>
+
+    <div class="doc-section" id="t7">
+      <div class="section-number">Section 07</div>
+      <h2>Intellectual Property</h2>
+
+      <h3>7.1 Our Property</h3>
+      <p>StatusStudio, including its design, code, graphics, user interface, features, and all content created by us ("Company Content"), is owned by Creed Digital and protected by applicable intellectual property laws including copyright, trademark, and trade secret laws.</p>
+      <p>You are granted a limited, non-exclusive, non-transferable, revocable license to use the App for your personal, non-commercial purposes in accordance with these Terms.</p>
+
+      <h3>7.2 Restrictions</h3>
+      <p>You may not:</p>
+      <ul>
+        <li>Copy, modify, distribute, or create derivative works of the App</li>
+        <li>Remove or alter any copyright, trademark, or other proprietary notices</li>
+        <li>Use our name, logo, or branding without prior written consent</li>
+        <li>Sublicense, sell, rent, or lease access to the App</li>
+        <li>Use the App to build a competing product or service</li>
+      </ul>
+
+      <h3>7.3 Third-Party Assets</h3>
+      <p>Templates, fonts, and other assets provided within the App are licensed for use within StatusStudio exports. You are responsible for ensuring you have appropriate rights to any third-party media you import into the App. We are not responsible for your use of third-party copyrighted material.</p>
+    </div>
+
+    <div class="doc-section" id="t8">
+      <div class="section-number">Section 08</div>
+      <h2>Your Content</h2>
+
+      <h3>8.1 Ownership</h3>
+      <p>You retain full ownership of all content you create, import, or export using StatusStudio ("Your Content"). We do not claim any intellectual property rights over Your Content.</p>
+
+      <h3>8.2 Local Processing</h3>
+      <p>StatusStudio processes all Your Content (photos, videos, audio, text) entirely on your device. We do not upload, access, or store Your Content on our servers except where you explicitly use a cloud sync feature (if available).</p>
+
+      <h3>8.3 Your Responsibility</h3>
+      <p>You are solely responsible for:</p>
+      <ul>
+        <li>Ensuring you have the right to use any media you import into the App</li>
+        <li>Complying with the terms of any third-party platforms you share content to</li>
+        <li>The content you create, share, or publish using the App</li>
+        <li>Obtaining necessary permissions, releases, and consents for content featuring other people</li>
+        <li>Complying with applicable copyright laws when using music, footage, or imagery created by others</li>
+      </ul>
+
+      <h3>8.4 Backup</h3>
+      <p>We strongly recommend maintaining backups of Your Content. We are not responsible for loss of locally stored content due to device failure, App deletion, or other causes beyond our control.</p>
+    </div>
+
+    <div class="doc-section" id="t9">
+      <div class="section-number">Section 09</div>
+      <h2>Premium Subscriptions</h2>
+
+      <h3>9.1 Premium Plans</h3>
+      <p>StatusStudio offers optional paid Premium subscriptions that unlock additional features including watermark-free export, HD/4K quality, brand kit access, cloud backup, and removal of advertisements. Current pricing is displayed within the App.</p>
+
+      <h3>9.2 Billing</h3>
+      <p>Premium subscriptions are billed through and managed by Apple App Store (iOS) or Google Play (Android). Your payment method on file with Apple or Google will be charged at the start of each billing period. We do not directly handle or store payment information.</p>
+
+      <h3>9.3 Free Trial</h3>
+      <p>Where offered, free trials automatically convert to paid subscriptions at the end of the trial period unless cancelled before the trial ends. You will be notified of the trial length before starting.</p>
+
+      <h3>9.4 Auto-Renewal</h3>
+      <p>Subscriptions automatically renew at the end of each billing period. To cancel auto-renewal, you must do so through your Apple ID or Google Play account settings at least 24 hours before the end of the current billing period.</p>
+
+      <h3>9.5 Refunds</h3>
+      <p>Refund requests are handled entirely by Apple or Google according to their respective refund policies. Creed Digital does not process refunds directly. To request a refund, contact Apple Support or Google Play Support.</p>
+
+      <h3>9.6 Price Changes</h3>
+      <p>We reserve the right to change subscription pricing. You will be notified of price changes with reasonable advance notice, and changes will apply at the start of the next billing period.</p>
+
+      <h3>9.7 Cancellation</h3>
+      <p>You may cancel your subscription at any time. Upon cancellation, you retain Premium access until the end of your current paid billing period. No partial refunds are given for unused subscription time.</p>
+    </div>
+
+    <div class="doc-section" id="t10">
+      <div class="section-number">Section 10</div>
+      <h2>Free Tier &amp; Advertisements</h2>
+      <p>StatusStudio is free to download and use with a supported feature set. Free tier users may see advertisements powered by Google AdMob.</p>
+      <p>By using the free tier, you consent to the display of advertisements. Advertisements are subject to Google's advertising policies.</p>
+      <p>We are not responsible for the content of third-party advertisements. If you encounter an advertisement that is inappropriate or misleading, please contact us.</p>
+      <p>Upgrading to Premium permanently removes all advertisements for the duration of your active subscription.</p>
+    </div>
+
+    <div class="doc-section" id="t11">
+      <div class="section-number">Section 11</div>
+      <h2>Disclaimers</h2>
+      <div class="warning-box">
+        <p><strong>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND.</strong></p>
+      </div>
+      <p>To the fullest extent permitted by law, Creed Digital expressly disclaims all warranties, whether express, implied, statutory, or otherwise, including:</p>
+      <ul>
+        <li>Implied warranties of merchantability, fitness for a particular purpose, and non-infringement</li>
+        <li>Warranties that the App will be uninterrupted, error-free, or free of viruses</li>
+        <li>Warranties regarding the accuracy or completeness of any information provided</li>
+        <li>Warranties that the App will meet your specific requirements</li>
+      </ul>
+      <p>We do not warrant that defects in the App will be corrected, or that the App or its servers are free of viruses or other harmful components. Your use of the App is at your own risk.</p>
+    </div>
+
+    <div class="doc-section" id="t12">
+      <div class="section-number">Section 12</div>
+      <h2>Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law, in no event shall Creed Digital, its officers, directors, employees, or agents be liable for:</p>
+      <ul>
+        <li>Any indirect, incidental, special, consequential, or punitive damages</li>
+        <li>Loss of profits, data, goodwill, or other intangible losses</li>
+        <li>Damages resulting from unauthorized access to or alteration of your content</li>
+        <li>Damages resulting from your reliance on the App or content obtained through it</li>
+        <li>Loss of locally stored projects or media files</li>
+        <li>Any matter beyond our reasonable control</li>
+      </ul>
+      <p>Our total liability to you for any claims arising under or related to these Terms shall not exceed the greater of: (a) the amount you paid to us in the 12 months preceding the claim, or (b) USD $50.</p>
+      <p>Some jurisdictions do not allow the exclusion of certain warranties or limitation of liability. In such jurisdictions, our liability is limited to the greatest extent permitted by law.</p>
+    </div>
+
+    <div class="doc-section" id="t13">
+      <div class="section-number">Section 13</div>
+      <h2>Indemnification</h2>
+      <p>You agree to defend, indemnify, and hold harmless Creed Digital and its officers, directors, employees, contractors, and agents from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable legal fees) arising out of or relating to:</p>
+      <ul>
+        <li>Your use of the App in violation of these Terms</li>
+        <li>Your violation of any applicable laws or regulations</li>
+        <li>Your Content or any content you create, share, or publish using the App</li>
+        <li>Your infringement of any intellectual property or other rights of any third party</li>
+        <li>Any misrepresentation made by you</li>
+      </ul>
+    </div>
+
+    <div class="doc-section" id="t14">
+      <div class="section-number">Section 14</div>
+      <h2>Termination</h2>
+
+      <h3>14.1 Termination by You</h3>
+      <p>You may stop using StatusStudio at any time by deleting the App from your device. To delete your account and associated data, use the "Delete Account" option in the Account screen within the App.</p>
+
+      <h3>14.2 Termination by Us</h3>
+      <p>We reserve the right to suspend or terminate your access to the App at any time, with or without notice, for:</p>
+      <ul>
+        <li>Violation of these Terms</li>
+        <li>Engaging in fraudulent, abusive, or illegal activities</li>
+        <li>Creating a legal, technical, or security risk</li>
+        <li>Extended inactivity (with prior notice)</li>
+        <li>Any other reason at our sole discretion</li>
+      </ul>
+
+      <h3>14.3 Effect of Termination</h3>
+      <p>Upon termination, your right to use the App ceases immediately. Provisions of these Terms that by their nature should survive termination (including intellectual property, disclaimers, limitations of liability, and indemnification) will survive.</p>
+      <p>Active Premium subscriptions must be cancelled through Apple or Google — termination of your account does not automatically cancel your subscription.</p>
+    </div>
+
+    <div class="doc-section" id="t15">
+      <div class="section-number">Section 15</div>
+      <h2>Governing Law &amp; Disputes</h2>
+
+      <h3>15.1 Governing Law</h3>
+      <p>These Terms shall be governed by and construed in accordance with the laws of Uganda, without regard to its conflict of law principles.</p>
+
+      <h3>15.2 Dispute Resolution</h3>
+      <p>Before initiating any formal legal proceedings, you agree to first contact us to attempt to resolve any dispute informally. We will attempt to resolve disputes within 30 days of receiving written notice.</p>
+
+      <h3>15.3 Jurisdiction</h3>
+      <p>For disputes that cannot be resolved informally, you agree to submit to the personal jurisdiction of the courts located in Kampala, Uganda.</p>
+
+      <h3>15.4 Consumer Protection Laws</h3>
+      <p>Nothing in these Terms is intended to limit any rights you may have under applicable consumer protection laws in your jurisdiction. Residents of the European Union, United Kingdom, and Australia retain all rights afforded under local consumer protection legislation.</p>
+    </div>
+
+    <div class="doc-section" id="t16">
+      <div class="section-number">Section 16</div>
+      <h2>Changes to Terms</h2>
+      <p>We reserve the right to modify these Terms at any time. When we make material changes, we will:</p>
+      <ul>
+        <li>Update the "Last Updated" date at the top of this page</li>
+        <li>Send a push notification (if you have notifications enabled)</li>
+        <li>Display a notice within the App on next launch</li>
+        <li>For material changes affecting Premium subscribers, provide at least 30 days' notice</li>
+      </ul>
+      <p>Your continued use of the App after the effective date of the revised Terms constitutes your acceptance of the changes. If you do not agree to the new Terms, you must stop using the App.</p>
+    </div>
+
+    <div class="doc-section" id="t17">
+      <div class="section-number">Section 17</div>
+      <h2>Contact</h2>
+      <p>For questions about these Terms, to report violations, or to exercise any rights described herein, please contact us:</p>
+      <div class="contact-box">
+        <p><strong>Creed Digital — StatusStudio Legal</strong></p>
+        <p>📧 Email: <a href="mailto:info.statusstudio.creed.com">info.statusstudio.creed.com</a></p>
+        <p>📍 Kampala, Uganda</p>
+        <p style="font-size:13px; color:var(--text-hint); margin-top:12px;">
+          We aim to respond to all legal inquiries within 5 business days. For urgent matters involving safety or illegal content, we will respond within 24 hours.
+        </p>
+      </div>
+      <p style="margin-top:20px;">These Terms of Service, together with our <a href="privacy.html" style="color:var(--mint);">Privacy Policy</a>, constitute the entire agreement between you and Creed Digital regarding your use of StatusStudio.</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="doc-footer">
+  <span>© 2025 StatusStudio by Creed Digital. All rights reserved.</span>
+  <span>
+    <a href="index.html">Home</a> &nbsp;·&nbsp;
+    <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="terms.html">Terms of Service</a>
+  </span>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('.doc-section[id]');
+  const tocLinks = document.querySelectorAll('.toc a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    tocLinks.forEach(a => {
+      const active = a.getAttribute('href') === '#' + current;
+      a.style.color = active ? 'var(--text)' : '';
+      a.style.borderLeftColor = active ? 'var(--mint-dim)' : '';
+      a.style.background = active ? 'rgba(61,255,160,0.06)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>

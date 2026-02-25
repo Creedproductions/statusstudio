@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>StatusStudio — Create. Post. Stand Out.</title>
+<meta name="description" content="The all-in-one status and story creator for Instagram, X, WhatsApp, Facebook, TikTok and YouTube. 12 powerful tools, all processed on your device."/>
+<meta property="og:title" content="StatusStudio by Creed Production"/>
+<meta property="og:description" content="Create stunning posts in seconds. Free on iOS & Android."/>
+<meta name="theme-color" content="#7C3AFF"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════════════ */
+:root {
+  --v:        #7C3AFF;
+  --vl:       #9D6BFF;
+  --vd:       #5A20E0;
+  --mint:     #00E87A;
+  --mint2:    #00C463;
+  --red:      #FF3B5C;
+  --amber:    #FFB020;
+  --cyan:     #00C8FF;
+
+  /* DARK */
+  --bg0:  #08080F;
+  --bg1:  #0D0D1A;
+  --bg2:  #131326;
+  --bg3:  #1A1A34;
+  --b:    rgba(255,255,255,.07);
+  --bs:   rgba(255,255,255,.12);
+  --t1:   #EEEAFF;
+  --t2:   #8C87B0;
+  --t3:   #4E4A6A;
+  --shadow: 0 24px 64px rgba(0,0,0,.5);
+  --glow:  rgba(124,58,255,.22);
+}
+[data-theme="light"] {
+  --bg0:  #F7F6FF;
+  --bg1:  #EFECFF;
+  --bg2:  #E7E2FF;
+  --bg3:  #DDD6FF;
+  --b:    rgba(0,0,0,.07);
+  --bs:   rgba(0,0,0,.13);
+  --t1:   #0C0A1E;
+  --t2:   #4A4568;
+  --t3:   #8E89B2;
+  --shadow: 0 12px 40px rgba(80,60,200,.1);
+  --glow:  rgba(124,58,255,.12);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg0);
+  color:var(--t1);
+  overflow-x:hidden;
+  transition:background .3s,color .3s;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ═══════════════════════════════════════════════════════
+   GRAIN OVERLAY
+═══════════════════════════════════════════════════════ */
+#grain{
+  position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.028;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:800;
+  height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;
+  background:color-mix(in srgb,var(--bg0) 82%,transparent);
+  backdrop-filter:blur(28px) saturate(1.6);
+  -webkit-backdrop-filter:blur(28px) saturate(1.6);
+  border-bottom:1px solid var(--b);
+  transition:background .3s,border-color .3s;
+}
+
+/* Logo */
+.nl{display:flex;align-items:center;gap:0;flex-shrink:0}
+.nl img{height:34px;width:auto;object-fit:contain}
+.logo-dark{display:block}
+.logo-light{display:none}
+[data-theme="light"] .logo-dark{display:none}
+[data-theme="light"] .logo-light{display:block}
+
+/* Center links */
+.nc{
+  display:flex;align-items:center;gap:2px;
+  position:absolute;left:50%;transform:translateX(-50%);
+}
+.nc a{
+  font-size:13.5px;font-weight:500;color:var(--t2);
+  padding:6px 13px;border-radius:8px;
+  transition:color .2s,background .2s;
+  white-space:nowrap;
+}
+.nc a:hover{color:var(--t1);background:rgba(255,255,255,.06)}
+[data-theme="light"] .nc a:hover{background:rgba(0,0,0,.06)}
+
+/* Right */
+.nr{display:flex;align-items:center;gap:10px}
+
+/* Theme toggle */
+.tt{
+  width:36px;height:36px;border:1px solid var(--bs);border-radius:9px;
+  background:transparent;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--t2);transition:background .2s,color .2s,transform .2s;
+}
+.tt:hover{background:var(--b);color:var(--t1);transform:scale(1.05)}
+.tt svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.i-sun{display:none}
+.i-moon{display:block}
+[data-theme="light"] .i-sun{display:block}
+[data-theme="light"] .i-moon{display:none}
+
+/* CTA */
+.nav-cta{
+  font-size:13.5px;font-weight:600;color:#fff;
+  background:var(--v);padding:8px 20px;border-radius:9px;
+  transition:background .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 2px 14px var(--glow);
+}
+.nav-cta:hover{background:var(--vl);transform:translateY(-1px);box-shadow:0 6px 28px var(--glow)}
+
+/* ═══════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center;
+  padding:100px 48px 80px;
+  max-width:1280px;margin:0 auto;
+}
+
+.hero-l{padding-right:56px}
+
+.h-kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'DM Mono',monospace;
+  font-size:11px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--mint2);margin-bottom:26px;
+}
+.kicker-bar{width:24px;height:1px;background:var(--mint)}
+
+.hero h1{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(46px,5.5vw,80px);
+  font-weight:800;line-height:1.0;letter-spacing:-2.5px;
+  color:var(--t1);margin-bottom:22px;
+}
+.h1-grad{
+  background:linear-gradient(120deg,var(--v) 0%,var(--vl) 45%,var(--mint) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.hero-p{
+  font-size:17px;color:var(--t2);line-height:1.78;
+  max-width:440px;margin-bottom:38px;font-weight:400;
+}
+
+.hero-btns{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn-p{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:15px;font-weight:600;color:#fff;
+  background:var(--v);padding:14px 28px;border-radius:12px;
+  transition:background .2s,transform .2s,box-shadow .25s;
+  box-shadow:0 4px 22px var(--glow);
+}
+.btn-p:hover{background:var(--vl);transform:translateY(-2px);box-shadow:0 12px 44px var(--glow)}
+.btn-g{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:15px;font-weight:500;color:var(--t2);
+  padding-bottom:2px;border-bottom:1px solid var(--bs);
+  transition:color .2s,border-color .2s;
+}
+.btn-g:hover{color:var(--t1);border-color:var(--v)}
+
+.hero-note{
+  margin-top:18px;font-size:12px;color:var(--t3);
+  display:flex;align-items:center;gap:8px;
+}
+.hero-note::before{content:'';width:14px;height:1px;background:var(--t3)}
+
+/* Hero right — app mockup */
+.hero-r{
+  display:flex;justify-content:center;align-items:center;
+  position:relative;
+}
+
+.mockup{
+  width:288px;
+  background:var(--bg1);
+  border:1px solid var(--bs);
+  border-radius:28px;overflow:hidden;
+  box-shadow:var(--shadow),0 0 0 1px var(--b);
+  position:relative;z-index:1;
+}
+.mock-topbar{
+  height:8px;background:var(--bg2);
+  display:flex;align-items:center;padding:0 14px;gap:4px;
+}
+.mock-dot{width:5px;height:5px;border-radius:50%}
+.mock-body{padding:18px 16px}
+.mock-app-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.mock-title{font-family:'Bricolage Grotesque',sans-serif;font-size:19px;font-weight:800;color:var(--t1)}
+.mock-sub{font-size:10px;color:var(--t3);margin-bottom:2px}
+.mock-av{
+  width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg,#4B0FCC,#7C3AFF);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800;color:#fff;
+}
+.mock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:16px}
+.mock-tile{
+  border-radius:11px;aspect-ratio:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  font-size:16px;
+}
+.mock-tile span{font-size:8px;font-weight:600;color:var(--t3)}
+.mock-rlabel{font-size:10px;font-weight:600;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:7px}
+.mock-ri{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 9px;border-radius:9px;
+  background:rgba(255,255,255,.04);
+  margin-bottom:5px;
+}
+[data-theme="light"] .mock-ri{background:rgba(0,0,0,.04)}
+.mock-ri-ic{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.mock-ri-n{font-size:10.5px;font-weight:600;color:var(--t1)}
+.mock-ri-t{font-size:9px;color:var(--t3)}
+.mock-ri-age{font-size:9px;color:var(--t3);margin-left:auto;flex-shrink:0}
+
+/* floating badges */
+.fbadge{
+  position:absolute;
+  background:var(--bg1);border:1px solid var(--bs);
+  border-radius:11px;padding:7px 13px 7px 10px;
+  font-size:12px;font-weight:600;color:var(--t1);
+  display:flex;align-items:center;gap:7px;
+  box-shadow:0 8px 30px rgba(0,0,0,.3);
+  white-space:nowrap;
+  animation:bob 5s ease-in-out infinite;
+}
+.fb1{top:30px;right:-30px;animation-delay:0s}
+.fb2{bottom:80px;left:-28px;animation-delay:-2s}
+.fb3{bottom:18px;right:4px;font-size:11px;animation-delay:-3.5s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.fdot{width:7px;height:7px;border-radius:50%}
+
+/* ═══════════════════════════════════════════════════════
+   MARQUEE
+═══════════════════════════════════════════════════════ */
+.mq-wrap{
+  overflow:hidden;
+  border-top:1px solid var(--b);border-bottom:1px solid var(--b);
+  padding:15px 0;background:var(--bg1);
+}
+.mq-track{
+  display:flex;gap:44px;width:max-content;
+  animation:mq 26s linear infinite;
+}
+.mq-wrap:hover .mq-track{animation-play-state:paused}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-item{
+  display:flex;align-items:center;gap:9px;
+  font-size:13.5px;font-weight:500;color:var(--t2);
+  white-space:nowrap;flex-shrink:0;
+}
+.mq-item svg{width:22px;height:22px;flex-shrink:0;border-radius:5px}
+
+/* ═══════════════════════════════════════════════════════
+   SECTIONS COMMON
+═══════════════════════════════════════════════════════ */
+.sec{padding:96px 48px}
+.ctr{max-width:1200px;margin:0 auto}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:'DM Mono',monospace;
+  font-size:11px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--vl);margin-bottom:14px;
+}
+[data-theme="light"] .eyebrow{color:var(--vd)}
+.ey-dash{width:18px;height:1px;background:currentColor}
+
+.sec-h{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(30px,4vw,52px);font-weight:800;
+  line-height:1.06;letter-spacing:-1.5px;color:var(--t1);margin-bottom:14px;
+}
+.sec-p{font-size:17px;color:var(--t2);max-width:480px;line-height:1.78}
+
+/* ═══════════════════════════════════════════════════════
+   BENTO TOOLS GRID
+═══════════════════════════════════════════════════════ */
+.bento{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:176px;
+  gap:10px;margin-top:50px;
+}
+.bc{
+  background:var(--bg1);border:1px solid var(--b);
+  border-radius:18px;padding:22px;
+  position:relative;overflow:hidden;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+  cursor:default;
+}
+.bc:hover{border-color:var(--bs);transform:translateY(-3px);box-shadow:var(--shadow)}
+.bc.w2{grid-column:span 2}
+.bc.h2{grid-row:span 2}
+.bc-icon{font-size:26px;margin-bottom:10px;display:block}
+.bc h3{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--t1);margin-bottom:5px}
+.bc p{font-size:13px;color:var(--t2);line-height:1.6}
+.bc-glow{
+  position:absolute;bottom:-20px;right:-20px;
+  width:90px;height:90px;border-radius:50%;
+  filter:blur(40px);opacity:.35;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PLATFORMS
+═══════════════════════════════════════════════════════ */
+.plat-sec{background:var(--bg1)}
+.plat-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--b);border:1px solid var(--b);border-radius:18px;overflow:hidden;
+  margin-top:50px;
+}
+.plat-cell{
+  background:var(--bg1);padding:28px 24px;
+  display:flex;align-items:flex-start;gap:14px;
+  transition:background .2s;
+}
+.plat-cell:hover{background:var(--bg2)}
+.plat-ic{
+  width:46px;height:46px;border-radius:13px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.plat-ic svg{width:26px;height:26px;border-radius:5px;overflow:hidden}
+.plat-name{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:var(--t1);margin-bottom:3px}
+.plat-subs{font-size:13px;color:var(--t2)}
+
+/* ═══════════════════════════════════════════════════════
+   STATS
+═══════════════════════════════════════════════════════ */
+.stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--b);border:1px solid var(--b);border-radius:18px;overflow:hidden;
+  margin-top:48px;
+}
+.stat-cell{background:var(--bg0);padding:32px 28px}
+.stat-n{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:42px;font-weight:800;line-height:1;letter-spacing:-2px;
+  background:linear-gradient(120deg,var(--vl),var(--mint));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:7px;
+}
+.stat-l{font-size:14px;color:var(--t2);font-weight:500}
+
+/* ═══════════════════════════════════════════════════════
+   FEATURES
+═══════════════════════════════════════════════════════ */
+.feat-sec{background:var(--bg1)}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px}
+.feat-card{
+  padding:26px;border:1px solid var(--b);border-radius:16px;
+  background:var(--bg0);
+  transition:border-color .25s,transform .25s;
+}
+.feat-card:hover{border-color:var(--bs);transform:translateY(-3px)}
+.feat-ic{
+  width:42px;height:42px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:14px;
+}
+.feat-card h3{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:7px}
+.feat-card p{font-size:14px;color:var(--t2);line-height:1.7}
+
+/* ═══════════════════════════════════════════════════════
+   PREMIUM
+═══════════════════════════════════════════════════════ */
+.prem-inner{
+  display:grid;grid-template-columns:1fr 400px;gap:60px;align-items:center;
+  background:var(--bg1);border:1px solid var(--bs);border-radius:24px;padding:60px;
+  position:relative;overflow:hidden;
+}
+.prem-inner::before{
+  content:'';position:absolute;top:-100px;right:-100px;
+  width:450px;height:450px;
+  background:radial-gradient(circle,rgba(124,58,255,.16),transparent 65%);
+  pointer-events:none;
+}
+.prem-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:color-mix(in srgb,var(--mint) 10%,transparent);
+  border:1px solid color-mix(in srgb,var(--mint) 22%,transparent);
+  color:var(--mint2);border-radius:100px;
+  padding:4px 12px;font-size:11px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:18px;
+}
+.prem-price{display:flex;align-items:baseline;gap:5px;margin:20px 0}
+.price-big{font-family:'Bricolage Grotesque',sans-serif;font-size:48px;font-weight:800;letter-spacing:-2px;color:var(--t1)}
+.price-per{font-size:15px;color:var(--t2)}
+.perk-list{list-style:none;display:flex;flex-direction:column;gap:11px}
+.perk-item{display:flex;align-items:center;gap:11px;font-size:15px;color:var(--t2)}
+.perk-ck{
+  width:19px;height:19px;border-radius:50%;flex-shrink:0;
+  background:color-mix(in srgb,var(--mint) 13%,transparent);
+  border:1px solid color-mix(in srgb,var(--mint) 28%,transparent);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--mint2);font-size:10px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   DOWNLOAD
+═══════════════════════════════════════════════════════ */
+.dl-sec{background:var(--bg2)}
+.dl-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.store-list{display:flex;flex-direction:column;gap:11px}
+.store-btn{
+  display:flex;align-items:center;gap:16px;
+  padding:17px 20px;border:1px solid var(--bs);border-radius:14px;
+  background:var(--bg0);transition:border-color .2s,transform .2s;
+}
+.store-btn:hover{border-color:var(--v);transform:translateX(4px)}
+.st-logo{font-size:30px;line-height:1}
+.st-sub{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
+.st-main{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:700;color:var(--t1)}
+.st-arr{margin-left:auto;font-size:18px;color:var(--t3);transition:color .2s}
+.store-btn:hover .st-arr{color:var(--v)}
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════ */
+footer{border-top:1px solid var(--b);padding:60px 48px 36px}
+.foot-grid{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:2.4fr 1fr 1fr 1fr;gap:56px;
+  padding-bottom:44px;border-bottom:1px solid var(--b);
+}
+.foot-brand p{font-size:14px;color:var(--t2);margin-top:14px;line-height:1.75;max-width:300px}
+.foot-brand .by{margin-top:12px;font-size:13px;color:var(--t3)}
+.foot-brand .by strong{color:var(--t2)}
+.foot-col h5{font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:700;color:var(--t1);margin-bottom:16px}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-col ul li a{font-size:14px;color:var(--t2);transition:color .2s}
+.foot-col ul li a:hover{color:var(--t1)}
+.foot-email{margin-top:16px;font-size:12.5px;color:var(--t3);line-height:1.6}
+.foot-email a{color:var(--t3);transition:color .2s}
+.foot-email a:hover{color:var(--t2)}
+.foot-bottom{
+  max-width:1200px;margin:28px auto 0;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:13px;color:var(--t3);flex-wrap:wrap;gap:10px;
+}
+.foot-bottom a{color:var(--t3);transition:color .2s}
+.foot-bottom a:hover{color:var(--t2)}
+
+/* ═══════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════ */
+.sr{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.sr.in{opacity:1;transform:translateY(0)}
+.sd1{transition-delay:.06s}.sd2{transition-delay:.12s}.sd3{transition-delay:.18s}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════ */
+@media(max-width:1080px){
+  .hero{grid-template-columns:1fr;text-align:center;padding:96px 24px 60px}
+  .hero-l{padding-right:0}
+  .hero-p,.hero-btns,.hero-note{margin-left:auto;margin-right:auto}
+  .hero-btns{justify-content:center}
+  .hero-r{display:none}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bc.w2{grid-column:span 2}
+  .plat-grid{grid-template-columns:1fr 1fr}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .prem-inner{grid-template-columns:1fr;padding:36px 28px;gap:32px}
+  .dl-inner{grid-template-columns:1fr;gap:44px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+}
+@media(max-width:720px){
+  #nav{padding:0 20px}
+  .nc{display:none}
+  .sec{padding:72px 20px}
+  .bento{grid-template-columns:1fr}
+  .bc.w2{grid-column:span 1}
+  .plat-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+  footer{padding:48px 20px 28px}
+  .fbadge{display:none}
+}
+</style>
+</head>
+<body>
+<div id="grain" aria-hidden="true"></div>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav id="nav">
+  <a href="index.html" class="nl">
+    <img src="logo-d.png" alt="StatusStudio" class="logo-dark"/>
+    <img src="logol.png"  alt="StatusStudio" class="logo-light"/>
+  </a>
+
+  <div class="nc">
+    <a href="#tools">Tools</a>
+    <a href="#platforms">Platforms</a>
+    <a href="#premium">Premium</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+
+  <div class="nr">
+    <button class="tt" id="tt" aria-label="Toggle theme">
+      <svg class="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="#download" class="nav-cta">Download Free</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-l">
+    <div class="h-kicker"><span class="kicker-bar"></span>Free on iOS &amp; Android</div>
+    <h1>Create.<br/>Post.<br/><span class="h1-grad">Stand Out.</span></h1>
+    <p class="hero-p">The all-in-one status and story creator. Text boards, HD video tools, collages, captions — 12 tools, all processed on your device. No uploads. No compromise.</p>
+    <div class="hero-btns">
+      <a href="#download" class="btn-p">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Download Free
+      </a>
+      <a href="#tools" class="btn-g">Explore 12 tools →</a>
+    </div>
+    <p class="hero-note">No account required · Free forever</p>
+  </div>
+
+  <div class="hero-r">
+    <div class="mockup">
+      <div class="mock-topbar">
+        <div class="mock-dot" style="background:#FF5F57"></div>
+        <div class="mock-dot" style="background:#FEBC2E"></div>
+        <div class="mock-dot" style="background:#28C840"></div>
+      </div>
+      <div class="mock-body">
+        <div class="mock-app-header">
+          <div>
+            <div class="mock-sub">Good morning</div>
+            <div class="mock-title">Studio Hub</div>
+          </div>
+          <div class="mock-av">K</div>
+        </div>
+        <div class="mock-grid">
+          <div class="mock-tile" style="background:rgba(124,58,255,.13)">🖊️<span>Text</span></div>
+          <div class="mock-tile" style="background:rgba(0,232,122,.1)">🖼️<span>Collage</span></div>
+          <div class="mock-tile" style="background:rgba(255,59,92,.1)">🎬<span>Video</span></div>
+          <div class="mock-tile" style="background:rgba(0,200,255,.1)">✂️<span>Split</span></div>
+          <div class="mock-tile" style="background:rgba(139,79,255,.1)">⚡<span>Speed</span></div>
+          <div class="mock-tile" style="background:rgba(255,176,32,.1)">💬<span>Captions</span></div>
+          <div class="mock-tile" style="background:rgba(0,196,99,.1)">🎵<span>Audio</span></div>
+          <div class="mock-tile" style="background:rgba(255,68,102,.1)">🔗<span>Merge</span></div>
+        </div>
+        <div class="mock-rlabel">Recent</div>
+        <div class="mock-ri">
+          <div class="mock-ri-ic" style="background:rgba(124,58,255,.13)">🖊️</div>
+          <div><div class="mock-ri-n">Morning Vibes</div><div class="mock-ri-t">Text Board</div></div>
+          <div class="mock-ri-age">2m</div>
+        </div>
+        <div class="mock-ri">
+          <div class="mock-ri-ic" style="background:rgba(255,59,92,.1)">🎬</div>
+          <div><div class="mock-ri-n">Weekend Clip</div><div class="mock-ri-t">Video Edit</div></div>
+          <div class="mock-ri-age">1h</div>
+        </div>
+      </div>
+    </div>
+    <div class="fbadge fb1"><span class="fdot" style="background:var(--mint)"></span>All editing on-device</div>
+    <div class="fbadge fb2"><span class="fdot" style="background:var(--vl)"></span>12 creative tools</div>
+    <div class="fbadge fb3"><span class="fdot" style="background:var(--amber)"></span>Free forever</div>
+  </div>
+</section>
+
+<!-- ═══════════════════ MARQUEE ═══════════════════ -->
+<div class="mq-wrap" aria-hidden="true">
+  <div class="mq-track" id="mq">
+    <!-- Set A -->
+    <span class="mq-item"><svg viewBox="0 0 24 24"><defs><radialGradient id="ig1" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285AEB"/></radialGradient></defs><rect width="24" height="24" rx="5" fill="url(#ig1)"/><circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="1.8" fill="none"/><circle cx="17.3" cy="6.7" r="1.1" fill="white"/></svg>Instagram</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#25D366"/><path d="M12 4a8 8 0 00-6.89 12.04L4 20l4.09-1.07A8 8 0 1012 4zm3.56 10.63c-.19-.1-1.13-.56-1.31-.62-.17-.06-.3-.1-.42.1-.13.19-.49.62-.6.74-.11.13-.22.14-.41.05-.19-.1-.8-.3-1.53-.95a5.8 5.8 0 01-1.06-1.3c-.11-.2-.01-.3.08-.4l.28-.34c.09-.11.12-.19.18-.32.06-.13.03-.25-.01-.35-.05-.1-.43-1.04-.59-1.42-.15-.37-.31-.32-.43-.32h-.36c-.12 0-.32.05-.49.24-.17.19-.64.63-.64 1.54s.66 1.79.75 1.91c.1.13 1.3 1.98 3.14 2.78.44.19.78.3 1.05.38.44.14.84.12 1.16.07.35-.05 1.09-.45 1.24-.88.15-.43.15-.8.1-.88-.05-.08-.18-.13-.38-.22z" fill="white"/></svg>WhatsApp</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.46 21H2.4l7.17-8.19L2 3h6.33l4.37 5.78 5.05-5.78zm-1.08 16.17h1.7L7.4 4.74H5.58z" fill="white"/></svg>X (Twitter)</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M17 4h-2.5A4.5 4.5 0 0010 8.5V11H8v3h2v8h3v-8h2.5l.5-3H13V8.5a1.5 1.5 0 011.5-1.5H17V4z" fill="white"/></svg>Facebook</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#010101"/><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77 0 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-6.13 6.29 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.05a8.16 8.16 0 004.77 1.52V7.14a4.85 4.85 0 01-2-.45z" fill="white"/></svg>TikTok</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF0000"/><path d="M22.54 6.42a2.78 2.78 0 00-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 1.96A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.94 1.95C5.12 20 12 20 12 20s6.88 0 8.6-.47a2.78 2.78 0 001.94-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="white"/></svg>YouTube</span>
+    <span class="mq-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 12h10M12 7v10"/></svg>On-device processing</span>
+    <span class="mq-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Zero uploads</span>
+    <!-- Set B (duplicate for loop) -->
+    <span class="mq-item"><svg viewBox="0 0 24 24"><defs><radialGradient id="ig2" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285AEB"/></radialGradient></defs><rect width="24" height="24" rx="5" fill="url(#ig2)"/><circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="1.8" fill="none"/><circle cx="17.3" cy="6.7" r="1.1" fill="white"/></svg>Instagram</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#25D366"/><path d="M12 4a8 8 0 00-6.89 12.04L4 20l4.09-1.07A8 8 0 1012 4zm3.56 10.63c-.19-.1-1.13-.56-1.31-.62-.17-.06-.3-.1-.42.1-.13.19-.49.62-.6.74-.11.13-.22.14-.41.05-.19-.1-.8-.3-1.53-.95a5.8 5.8 0 01-1.06-1.3c-.11-.2-.01-.3.08-.4l.28-.34c.09-.11.12-.19.18-.32.06-.13.03-.25-.01-.35-.05-.1-.43-1.04-.59-1.42-.15-.37-.31-.32-.43-.32h-.36c-.12 0-.32.05-.49.24-.17.19-.64.63-.64 1.54s.66 1.79.75 1.91c.1.13 1.3 1.98 3.14 2.78.44.19.78.3 1.05.38.44.14.84.12 1.16.07.35-.05 1.09-.45 1.24-.88.15-.43.15-.8.1-.88-.05-.08-.18-.13-.38-.22z" fill="white"/></svg>WhatsApp</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#000"/><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.46 21H2.4l7.17-8.19L2 3h6.33l4.37 5.78 5.05-5.78zm-1.08 16.17h1.7L7.4 4.74H5.58z" fill="white"/></svg>X (Twitter)</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M17 4h-2.5A4.5 4.5 0 0010 8.5V11H8v3h2v8h3v-8h2.5l.5-3H13V8.5a1.5 1.5 0 011.5-1.5H17V4z" fill="white"/></svg>Facebook</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#010101"/><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.77 0 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-6.13 6.29 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.05a8.16 8.16 0 004.77 1.52V7.14a4.85 4.85 0 01-2-.45z" fill="white"/></svg>TikTok</span>
+    <span class="mq-item"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF0000"/><path d="M22.54 6.42a2.78 2.78 0 00-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 1.96A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.94 1.95C5.12 20 12 20 12 20s6.88 0 8.6-.47a2.78 2.78 0 001.94-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="white"/></svg>YouTube</span>
+    <span class="mq-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 12h10M12 7v10"/></svg>On-device processing</span>
+    <span class="mq-item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Zero uploads</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ TOOLS ═══════════════════ -->
+<section class="sec" id="tools">
+  <div class="ctr">
+    <div class="sr"><div class="eyebrow"><span class="ey-dash"></span>What You Can Make</div></div>
+    <h2 class="sec-h sr sd1">Every tool you need.<br/>Nothing you don't.</h2>
+    <div class="bento">
+      <div class="bc w2 sr sd1"><span class="bc-icon">🖊️</span><h3>Text Boards</h3><p>Design bold text posts with custom fonts, colors, and backgrounds. Quotes, announcements, status updates — all pixel-perfect.</p><div class="bc-glow" style="background:var(--v)"></div></div>
+      <div class="bc sr sd2"><span class="bc-icon">🖼️</span><h3>Photo Collage</h3><p>6 layout presets. Arrange photos into a single share-ready image with custom gaps.</p><div class="bc-glow" style="background:var(--mint)"></div></div>
+      <div class="bc sr sd3"><span class="bc-icon">🎬</span><h3>Video Editor</h3><p>Trim, crop, mute, brightness & contrast. Export up to 4K with no watermark on Premium.</p><div class="bc-glow" style="background:var(--red)"></div></div>
+      <div class="bc sr sd1"><span class="bc-icon">✂️</span><h3>Split for Status</h3><p>Auto-split long videos into 60-second segments for WhatsApp and Instagram.</p><div class="bc-glow" style="background:var(--cyan)"></div></div>
+      <div class="bc sr sd2"><span class="bc-icon">⚡</span><h3>Speed Adjuster</h3><p>0.25× slow-mo to 4× fast-forward with automatic audio pitch correction built in.</p><div class="bc-glow" style="background:var(--vl)"></div></div>
+      <div class="bc w2 sr sd3"><span class="bc-icon">💬</span><h3>Auto Captions</h3><p>Add subtitles manually or generate them automatically. Export as .SRT or burn directly onto the video — every platform, every viewer.</p><div class="bc-glow" style="background:var(--amber)"></div></div>
+      <div class="bc sr sd1"><span class="bc-icon">🎵</span><h3>Video to Audio</h3><p>Extract clean audio as MP3, AAC or WAV from any video file.</p><div class="bc-glow" style="background:var(--mint)"></div></div>
+      <div class="bc sr sd2"><span class="bc-icon">📊</span><h3>Audiogram</h3><p>Turn any audio file into an animated waveform video — ready to post.</p><div class="bc-glow" style="background:var(--v)"></div></div>
+      <div class="bc sr sd3"><span class="bc-icon">🔗</span><h3>Merge Clips</h3><p>Combine multiple clips into one seamless export. No quality loss.</p><div class="bc-glow" style="background:var(--amber)"></div></div>
+      <div class="bc sr sd1"><span class="bc-icon">🎨</span><h3>Brand Kit</h3><p>Your colors, fonts, and logo — applied to every project in a single tap.</p><div class="bc-glow" style="background:var(--vl)"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PLATFORMS ═══════════════════ -->
+<section class="sec plat-sec" id="platforms">
+  <div class="ctr">
+    <div class="sr"><div class="eyebrow"><span class="ey-dash"></span>Platform Support</div></div>
+    <h2 class="sec-h sr sd1">Sized perfectly<br/>for where you post.</h2>
+    <p class="sec-p sr sd2">Every platform has different requirements. StatusStudio knows them all — create once, export in the right format every time.</p>
+    <div class="plat-grid sr">
+      <!-- Instagram -->
+      <div class="plat-cell">
+        <div class="plat-ic" style="background:rgba(221,42,123,.1)">
+          <svg viewBox="0 0 24 24" style="border-radius:0"><defs><radialGradient id="ig-p" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285AEB"/></radialGradient></defs><rect width="24" height="24" rx="6" fill="url(#ig-p)"/><circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="1.8" fill="none"/><circle cx="17.3" cy="6.7" r="1.1" fill="white"/></svg>
+        </div>
+        <div><div class="plat-name">Instagram</div><div class="plat-subs">Stories · Posts · Reels · Carousel</div></div>
+      </div>
+      <!-- WhatsApp -->
+      <div class="plat-cell">
+        <div class="plat-ic" style="background:rgba(37,211,102,.1)">
+          <svg viewBox="0 0 24 24" style="border-radius:0"><rect width="24" height="24" rx="6" fill="#25D366"/><path d="M12 4a8 8 0 00-6.89 12.04L4 20l4.09-1.07A8 8 0 1012 4zm3.56 10.63c-.19-.1-1.13-.56-1.31-.62-.17-.06-.3-.1-.42.1-.13.19-.49.62-.6.74-.11.13-.22.14-.41.05-.19-.1-.8-.3-1.53-.95a5.8 5.8 0 01-1.06-1.3c-.11-.2-.01-.3.08-.4l.28-.34c.09-.11.12-.19.18-.32.06-.13.03-.25-.01-.35-.05-.1-.43-1.04-.59-1.42-.15-.37-.31-.32-.43-.32h-.36c-.12 0-.32.05-.49.24-.17.19-.64.63-.64 1.54s.66 1.79.75 1.91c.1.13 1.3 1.98 3.14 2.78.44.19.78.3 1.05.38.44.14.84.12 1.16.07.35-.05 1.09-.45 1.24-.88.15-.43.15-.8.1-.88-.05-.08-.18-.13-.38-.22z" fill="white"/></svg>
+        </div>
+        <div><div class="plat-name">WhatsApp</div><div class="plat-subs">Status · 60s Video · Images</div></div>
+      </div>
+      <!-- X -->
+      <div class="plat-cell">
+        <div class="plat-ic" style="background:rgba(0,0,0,.15)">
+          <svg viewBox="0 0 24 24" style="border-radius:0"><rect width="24" height="24" rx="6" fill="#000"/><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.46 21H2.4l7.17-8.19L2 3h6.33l4.37 5.78 5.05-5.78zm-1.08 16.17h1.7L7.4 4.74H5.58z" fill="white"/></svg>
+        </div>
+        <div><div class="plat-name">X (Twitter)</div><div class="plat-subs">Cards · Timeline · Spaces</div></div>
+      </div>
+      <!-- Facebook -->
+      <div class="plat-cell">
+        <div class="plat-ic" style="background:rgba(24,119,242,.1)">
+          <svg viewBox="0 0 24 24" style="border-radius:0"><rect width="24" height="24" rx="6" fill="#1877F2"/><path d="M17 4h-2.5A4.5 4.5 0 0010 8.5V11H8v3h2v8h3v-8h2.5l.5-3H13V8.5a1.5 1.5 0 011.5-1.5H17V4z" fill="white"/></svg>
+        </div>
+        <div><div class="plat-name">Facebook</div><div class="plat-subs">Stories · Posts · Covers</div></div>
+      </div>
+      <!-- TikTok -->
+      <div class="plat-cell">
+        <div class="plat-ic" style="background:rgba(100,100,100,.1)">
+          <svg viewBox="0 0 24 24" style="border-radius:0"><rect width="24" height="24" rx="6" fill="#010101"/><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 000 12.68 6.34 6.34 0 006.33-6.34V9.05a8.16 8.16 0 004.77 1.52V7.14a4.85 4.85 0 01-1-.45z" fill="white"/></svg>
+        </div>
+        <div><div class="plat-name">TikTok</div><div class="plat-subs">Vertical Video · Covers</div></div>
+      </div>
+      <!-- YouTube -->
+      <div class="plat-cell">
+        <div class="plat-ic" style="background:rgba(255,0,0,.1)">
+          <svg viewBox="0 0 24 24" style="border-radius:0"><rect width="24" height="24" rx="6" fill="#FF0000"/><path d="M22.54 6.42a2.78 2.78 0 00-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 1.96A29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.94 1.95C5.12 20 12 20 12 20s6.88 0 8.6-.47a2.78 2.78 0 001.94-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="white"/></svg>
+        </div>
+        <div><div class="plat-name">YouTube</div><div class="plat-subs">Shorts · Thumbnails · Community</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ STATS ═══════════════════ -->
+<section class="sec" style="padding-top:0;padding-bottom:80px">
+  <div class="ctr">
+    <div class="stats-row sr">
+      <div class="stat-cell"><div class="stat-n">12+</div><div class="stat-l">Creative tools built-in</div></div>
+      <div class="stat-cell"><div class="stat-n">6</div><div class="stat-l">Social platforms supported</div></div>
+      <div class="stat-cell"><div class="stat-n">4K</div><div class="stat-l">Maximum export quality</div></div>
+      <div class="stat-cell"><div class="stat-n">0</div><div class="stat-l">Files sent to our servers</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FEATURES ═══════════════════ -->
+<section class="sec feat-sec">
+  <div class="ctr">
+    <div class="sr"><div class="eyebrow"><span class="ey-dash"></span>Why StatusStudio</div></div>
+    <h2 class="sec-h sr sd1">Built on principles<br/>most apps ignore.</h2>
+    <div class="feat-grid">
+      <div class="feat-card sr sd1"><div class="feat-ic" style="background:rgba(124,58,255,.12)">🔒</div><h3>Fully On-Device</h3><p>Every edit, export, and transformation happens on your phone. Your media never leaves your device unless you explicitly share it.</p></div>
+      <div class="feat-card sr sd2"><div class="feat-ic" style="background:rgba(0,232,122,.1)">📶</div><h3>Works Offline</h3><p>No cloud rendering. No WiFi dependency. Create and export anywhere — even in airplane mode.</p></div>
+      <div class="feat-card sr sd3"><div class="feat-ic" style="background:rgba(255,176,32,.1)">⚡</div><h3>Instant Export</h3><p>Native device processing means exports happen in seconds. No queues, no upload bars, no waiting on someone else's server.</p></div>
+      <div class="feat-card sr sd1"><div class="feat-ic" style="background:rgba(0,200,255,.1)">💎</div><h3>No Watermarks</h3><p>Premium users export 100% clean content. Your posts represent you — not our logo. Free users get a small removable badge.</p></div>
+      <div class="feat-card sr sd2"><div class="feat-ic" style="background:rgba(255,59,92,.1)">🎨</div><h3>Brand Kit</h3><p>Set your colors, fonts, and logo once. Apply your brand to any project in a single tap for total visual consistency.</p></div>
+      <div class="feat-card sr sd3"><div class="feat-ic" style="background:rgba(139,79,255,.1)">📲</div><h3>Share Anywhere</h3><p>Share directly from the app to any platform on your phone. No gallery detours. Post faster, post more consistently.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PREMIUM ═══════════════════ -->
+<section class="sec" id="premium">
+  <div class="ctr">
+    <div class="prem-inner sr">
+      <div>
+        <div class="prem-badge">✨ Premium</div>
+        <h2 class="sec-h" style="max-width:360px;margin-bottom:4px">The full suite.<br/>Unlocked.</h2>
+        <div class="prem-price"><span class="price-big">$4.99</span><span class="price-per">/ month</span></div>
+        <p style="font-size:14px;color:var(--t2);margin-bottom:28px">Or $29.99/year — save 50%. 7-day free trial. Cancel anytime.</p>
+        <a href="#download" class="btn-p">Start Free Trial →</a>
+        <p style="margin-top:14px;font-size:12px;color:var(--t3)">No credit card during trial · iOS &amp; Android</p>
+      </div>
+      <ul class="perk-list">
+        <li class="perk-item"><span class="perk-ck">✓</span>No advertisements — ever</li>
+        <li class="perk-item"><span class="perk-ck">✓</span>4K watermark-free export</li>
+        <li class="perk-item"><span class="perk-ck">✓</span>Full Brand Kit access</li>
+        <li class="perk-item"><span class="perk-ck">✓</span>Priority rendering speed</li>
+        <li class="perk-item"><span class="perk-ck">✓</span>Cloud backup &amp; project sync</li>
+        <li class="perk-item"><span class="perk-ck">✓</span>All future tools included</li>
+        <li class="perk-item"><span class="perk-ck">✓</span>Early access to new features</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ DOWNLOAD ═══════════════════ -->
+<section class="sec dl-sec" id="download">
+  <div class="ctr">
+    <div class="dl-inner">
+      <div class="sr">
+        <div class="eyebrow"><span class="ey-dash"></span>Free Download</div>
+        <h2 class="sec-h">Start creating<br/>today. Free.</h2>
+        <p style="font-size:17px;color:var(--t2);margin-top:12px;line-height:1.78">No account required. No credit card. No catch. Download and start making content in under 60 seconds.</p>
+        <p style="margin-top:18px;font-size:13px;color:var(--t3)">iOS 15+ · Android 8.0+ · Made by Creed Production</p>
+      </div>
+      <div class="sr sd1">
+        <div class="store-list">
+          <a href="#" class="store-btn">
+            <span class="st-logo">🍎</span>
+            <div><div class="st-sub">Download on the</div><div class="st-main">App Store</div></div>
+            <span class="st-arr">→</span>
+          </a>
+          <a href="#" class="store-btn">
+            <span class="st-logo">
+              <svg width="30" height="30" viewBox="0 0 24 24"><defs><linearGradient id="gplay" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00C6FF"/><stop offset="100%" stop-color="#0072FF"/></linearGradient></defs><path d="M3.18 23.76c.3.17.65.19.96.06l11.14-6.47-2.5-2.51-9.6 8.92zM20.5 10.37L17.6 8.7l-2.82 2.82 2.82 2.82 2.93-1.7c.84-.49.84-1.79-.03-2.27zM3.18.24L12.79 9.1l-2.5 2.51L.14.69A.94.94 0 013.18.24zm9.6 11.37l-2.5 2.51 9.6 8.94a.943.943 0 001.51-.37z" fill="url(#gplay)"/></svg>
+            </span>
+            <div><div class="st-sub">Get it on</div><div class="st-main">Google Play</div></div>
+            <span class="st-arr">→</span>
+          </a>
+        </div>
+        <p style="margin-top:14px;font-size:12px;color:var(--t3);padding-left:2px">Free · Premium from $4.99/mo</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a href="index.html" style="display:inline-flex">
+        <img src="logo-d.png" alt="StatusStudio" class="logo-dark" style="height:30px"/>
+        <img src="logol.png"  alt="StatusStudio" class="logo-light" style="height:30px"/>
+      </a>
+      <p>The all-in-one status &amp; story creator for every social platform. Privacy-first — all processing happens on your device, not ours.</p>
+      <p class="by">A product of <strong>Creed Production</strong> · Kampala, Uganda</p>
+    </div>
+    <div class="foot-col">
+      <h5>Product</h5>
+      <ul>
+        <li><a href="#tools">All Tools</a></li>
+        <li><a href="#platforms">Platforms</a></li>
+        <li><a href="#premium">Premium</a></li>
+        <li><a href="#download">Download</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h5>Support</h5>
+      <ul>
+        <li><a href="mailto:info@creedproduction.com">Contact Support</a></li>
+        <li><a href="#download">App Help</a></li>
+        <li><a href="privacy.html">Data &amp; Privacy</a></li>
+      </ul>
+      <p class="foot-email"><a href="mailto:info@creedproduction.com">info@creedproduction.com</a></p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 StatusStudio · Creed Production. All rights reserved.</span>
+    <span>
+      <a href="privacy.html">Privacy</a>&nbsp;·&nbsp;
+      <a href="terms.html">Terms</a>&nbsp;·&nbsp;
+      <a href="mailto:info@creedproduction.com">Contact</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+// ── Theme ──────────────────────────────────────────
+const H = document.documentElement;
+const stored = localStorage.getItem('ss-theme');
+if (stored) {
+  H.setAttribute('data-theme', stored);
+} else if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  H.setAttribute('data-theme', 'light');
+}
+document.getElementById('tt').addEventListener('click', () => {
+  const next = H.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  H.setAttribute('data-theme', next);
+  localStorage.setItem('ss-theme', next);
+});
+
+// ── Scroll reveal ──────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.sr').forEach(el => io.observe(el));
+
+// ── Nav opacity on scroll ──────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.borderBottomColor =
+    scrollY > 50 ? 'var(--bs)' : 'var(--b)';
+}, { passive: true });
+</script>
+</body>
+</html>
