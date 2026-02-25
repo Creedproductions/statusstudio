@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>StatusStudio — Data Deletion</title>
+  <meta name="description" content="How to delete your data in StatusStudio, and how to request deletion via email."/>
+  <meta name="theme-color" content="#7C3AFF"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --v:#7C3AFF; --vl:#9D6BFF; --mint:#00E87A; --mint2:#00C463;
+      --bg0:#08080F; --bg1:#0D0D1A; --bg2:#131326; --bg3:#1A1A34;
+      --b:rgba(255,255,255,.07); --bs:rgba(255,255,255,.12);
+      --t1:#EEEAFF; --t2:#8C87B0; --t3:#4E4A6A;
+      --shadow:0 24px 64px rgba(0,0,0,.5);
+      --glow:rgba(124,58,255,.22);
+    }
+    [data-theme="light"]{
+      --bg0:#F7F6FF; --bg1:#EFECFF; --bg2:#E7E2FF; --bg3:#DDD6FF;
+      --b:rgba(0,0,0,.07); --bs:rgba(0,0,0,.13);
+      --t1:#0C0A1E; --t2:#4A4568; --t3:#8E89B2;
+      --shadow:0 12px 40px rgba(80,60,200,.1);
+      --glow:rgba(124,58,255,.12);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'DM Sans',sans-serif;
+      background:var(--bg0); color:var(--t1);
+      overflow-x:hidden; transition:background .3s,color .3s;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+    #grain{
+      position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.028;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23f)'/%3E%3C/svg%3E");
+    }
+
+    /* NAV (matches your index) */
+    #nav{
+      position:fixed;top:0;left:0;right:0;z-index:800;height:62px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 48px;
+      background:color-mix(in srgb,var(--bg0) 82%,transparent);
+      backdrop-filter:blur(28px) saturate(1.6);
+      -webkit-backdrop-filter:blur(28px) saturate(1.6);
+      border-bottom:1px solid var(--b);
+      transition:background .3s,border-color .3s;
+    }
+    .nl{display:flex;align-items:center;gap:0;flex-shrink:0}
+    .nl img{height:34px;width:auto;object-fit:contain}
+    .logo-dark{display:block}
+    .logo-light{display:none}
+    [data-theme="light"] .logo-dark{display:none}
+    [data-theme="light"] .logo-light{display:block}
+    .nc{display:flex;align-items:center;gap:2px;position:absolute;left:50%;transform:translateX(-50%)}
+    .nc a{
+      font-size:13.5px;font-weight:500;color:var(--t2);
+      padding:6px 13px;border-radius:8px;
+      transition:color .2s,background .2s;white-space:nowrap;
+    }
+    .nc a:hover{color:var(--t1);background:rgba(255,255,255,.06)}
+    [data-theme="light"] .nc a:hover{background:rgba(0,0,0,.06)}
+    .nr{display:flex;align-items:center;gap:10px}
+    .tt{
+      width:36px;height:36px;border:1px solid var(--bs);border-radius:9px;
+      background:transparent;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      color:var(--t2);transition:background .2s,color .2s,transform .2s;
+    }
+    .tt:hover{background:var(--b);color:var(--t1);transform:scale(1.05)}
+    .tt svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .i-sun{display:none}
+    .i-moon{display:block}
+    [data-theme="light"] .i-sun{display:block}
+    [data-theme="light"] .i-moon{display:none}
+    .nav-cta{
+      font-size:13.5px;font-weight:600;color:#fff;
+      background:var(--v);padding:8px 20px;border-radius:9px;
+      transition:background .2s,transform .15s,box-shadow .2s;
+      box-shadow:0 2px 14px var(--glow);
+    }
+    .nav-cta:hover{background:var(--vl);transform:translateY(-1px);box-shadow:0 6px 28px var(--glow)}
+
+    /* PAGE */
+    .wrap{max-width:980px;margin:0 auto;padding:110px 48px 70px}
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+      letter-spacing:1.8px;text-transform:uppercase;color:var(--mint2);
+      margin-bottom:16px;
+    }
+    .kbar{width:24px;height:1px;background:var(--mint)}
+    h1{
+      font-family:'Bricolage Grotesque',sans-serif;
+      font-size:clamp(34px,4.6vw,56px);
+      font-weight:800;line-height:1.05;letter-spacing:-1.6px;
+      margin-bottom:14px;
+    }
+    .lead{color:var(--t2);font-size:16.5px;line-height:1.8;max-width:760px;margin-bottom:26px}
+    .card{
+      background:var(--bg1);border:1px solid var(--b);border-radius:18px;
+      padding:24px;box-shadow:0 0 0 1px var(--b);
+      margin-top:14px;
+    }
+    .card h2{
+      font-family:'Bricolage Grotesque',sans-serif;
+      font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:10px;
+    }
+    .steps{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+    .step{
+      display:flex;gap:12px;align-items:flex-start;
+      padding:12px 12px;border-radius:14px;border:1px solid var(--b);
+      background:rgba(255,255,255,.03);
+    }
+    [data-theme="light"] .step{background:rgba(0,0,0,.03)}
+    .num{
+      width:26px;height:26px;border-radius:9px;flex-shrink:0;
+      background:color-mix(in srgb,var(--v) 18%,transparent);
+      border:1px solid color-mix(in srgb,var(--v) 30%,transparent);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'DM Mono',monospace;font-size:12px;color:var(--t1);
+    }
+    .txt{color:var(--t2);font-size:14.5px;line-height:1.7}
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--bs);border-radius:999px;
+      padding:9px 12px;background:transparent;color:var(--t2);
+      font-size:13.5px;
+    }
+    .pill strong{color:var(--t1);font-weight:700}
+    .ctaRow{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 16px;border-radius:12px;border:1px solid var(--bs);
+      color:var(--t1);background:transparent;
+      transition:transform .15s,border-color .2s,background .2s;
+      font-weight:700;font-size:14px;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:var(--v);background:rgba(124,58,255,.08)}
+    .btn.primary{
+      background:var(--v);border-color:transparent;color:#fff;
+      box-shadow:0 6px 24px var(--glow);
+    }
+    .btn.primary:hover{background:var(--vl)}
+    .small{margin-top:12px;color:var(--t3);font-size:12.5px;line-height:1.7}
+    footer{
+      border-top:1px solid var(--b);
+      padding:28px 48px 28px;
+      color:var(--t3);
+    }
+    .foot{
+      max-width:980px;margin:0 auto;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      font-size:13px;
+    }
+
+    @media(max-width:720px){
+      #nav{padding:0 20px}
+      .nc{display:none}
+      .wrap{padding:96px 20px 60px}
+      footer{padding:24px 20px}
+    }
+  </style>
+</head>
+<body>
+  <div id="grain" aria-hidden="true"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nl">
+      <img src="logo-d.png" alt="StatusStudio" class="logo-dark"/>
+      <img src="logol.png"  alt="StatusStudio" class="logo-light"/>
+    </a>
+
+    <div class="nc">
+      <a href="index.html#tools">Tools</a>
+      <a href="index.html#platforms">Platforms</a>
+      <a href="index.html#premium">Premium</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+
+    <div class="nr">
+      <button class="tt" id="tt" aria-label="Toggle theme">
+        <svg class="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <a href="index.html#download" class="nav-cta">Download Free</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <div class="kicker"><span class="kbar"></span>Data Deletion Request</div>
+    <h1>Delete your data in StatusStudio</h1>
+    <p class="lead">
+      StatusStudio is built to work without accounts for most features. If you want to remove app data or delete an account (if you created one),
+      you can do it inside the app. If you’re not satisfied, you can request deletion by email and we handle requests 24/7.
+    </p>
+
+    <section class="card">
+      <h2>Option A — Delete from inside the app (recommended)</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div class="txt">Open <strong>StatusStudio</strong>.</div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div class="txt">Tap the <strong>Account</strong> icon (top-right on Home, or inside <strong>Settings</strong>).</div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div class="txt">Go to <strong>Account</strong> → <strong>Delete Account</strong> (or <strong>Delete Data</strong>).</div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <div class="txt">Confirm the deletion and follow the on-screen steps.</div>
+        </div>
+      </div>
+
+      <div class="pillrow">
+        <div class="pill">Typical result: <strong>account removed</strong></div>
+        <div class="pill">Typical result: <strong>local data cleared</strong></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Option B — Request deletion by email (24/7)</h2>
+      <p class="txt">
+        If you can’t delete from inside the app or you need help, email us and we will process your request.
+      </p>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="mailto:info.statusstudio.creed@gmail.com?subject=StatusStudio%20Data%20Deletion%20Request&body=Hello%20StatusStudio%20Support,%0A%0AI%20want%20to%20delete%20my%20data%20and/or%20account.%0A%0A-%20App%20name:%20StatusStudio%0A-%20Platform:%20(iOS%20or%20Android)%0A-%20Your%20account%20email%20(if%20any):%0A-%20Request:%20(Delete%20account%20/%20Delete%20data)%0A-%20Any%20extra%20details:%0A%0AThank%20you.">
+          Email deletion request →
+        </a>
+        <a class="btn" href="index.html">Back to home</a>
+      </div>
+
+      <p class="small">
+        Email: <strong>info.statusstudio.creed@gmail.com</strong><br/>
+        For faster handling, include the email/identifier you used in the app (if any) and your platform (iOS/Android).
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>What we delete</h2>
+      <p class="txt">
+        Depending on what applies to you, we can delete your account record (if you created one) and any associated app data we control.
+        Content stored on your device (projects/media) can also be removed by deleting the app or clearing app storage in your device settings.
+      </p>
+      <p class="small">
+        Note: Some payment records (if you purchased Premium) may need to be retained for legal/tax compliance, but we can still delete account/profile data where applicable.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <span>© 2026 StatusStudio · Creed Production.</span>
+      <span>
+        <a href="privacy.html">Privacy</a>&nbsp;·&nbsp;
+        <a href="terms.html">Terms</a>&nbsp;·&nbsp;
+        <a href="mailto:info.statusstudio.creed@gmail.com">Data Deletion Email</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // Theme (same logic as index)
+    const H = document.documentElement;
+    const stored = localStorage.getItem('ss-theme');
+    if (stored) {
+      H.setAttribute('data-theme', stored);
+    } else if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      H.setAttribute('data-theme', 'light');
+    }
+    document.getElementById('tt').addEventListener('click', () => {
+      const next = H.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      H.setAttribute('data-theme', next);
+      localStorage.setItem('ss-theme', next);
+    });
+
+    // Nav border on scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').style.borderBottomColor =
+        scrollY > 50 ? 'var(--bs)' : 'var(--b)';
+    }, { passive: true });
+  </script>
+</body>
+</html>
